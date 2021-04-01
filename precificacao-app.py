@@ -182,7 +182,7 @@ proporção_bojo =['Predict_cauda','Predict_bojo','estimativa_subsidio', 'avalia
 
 # # Apply model to make predictions
 
-st.image('./predicoes.png')
+st.image('./predicoes.PNG')
 st.subheader('Predições')  
 try:
     input_df['estimativa_financiamento'] =  reg_finan.predict(input_df[cols_finan])
