@@ -15,14 +15,15 @@ st.write("""
 
 st.sidebar.header('input de atributos pelo usuário')
 
-st.sidebar.markdown("""[Exempo de CSV para input ](www.git.arquivo.csv)""")
+st.sidebar.markdown("""[Exempo de planilha para input ](https://github.com/brunoOnm/app-precificacao/raw/main/teste_price.xlsx)""")
 
 # Collects user input features into dataframe
-uploaded_file = st.sidebar.file_uploader("Carregue seu arquivo CSV", type=["csv"])
+uploaded_file = st.sidebar.file_uploader("Carregue seu arquivo xlsx", type=["xlsx"])
 
 
 if uploaded_file is not None:
-    input_df = pd.read_csv(uploaded_file,encoding = 'latin1', decimal =',',sep =';')
+    input_df = pd.read_excel(uploaded_file)
+    #input_df = pd.read_csv(uploaded_file,encoding = 'latin1', decimal =',',sep =';')
 else:
     
     def user_input_features():
