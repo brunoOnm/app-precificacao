@@ -4,3 +4,4 @@ numpy==1.18.1
 scikit-learn==0.22.1
 statsmodels==0.11.1
 xlrd== 1.2.0
+base64==2.1.0
