@@ -5,6 +5,8 @@
 import pandas as pd
 import streamlit as st
 import pickle
+import base64 #2.1.0
+from io import BytesIO
 
 st.image('./HEADER.png')
 
@@ -199,6 +201,27 @@ try:
     input_df['renda_ponderada_estimada']  = (input_df.proporcao_bojo *  input_df.Predict_bojo ) +  ((1-input_df.proporcao_bojo) *  input_df.Predict_cauda )
     #st.write(input_df['renda_ponderada_estimada'])
     st.write(input_df[['nome','renda_ponderada_estimada','estimativa_financiamento', 'estimativa_subsidio', 'Predict_bojo','Predict_cauda','proporcao_bojo']])
+   
+    def to_excel(df):
+        output = BytesIO()
+        writer = pd.ExcelWriter(output, engine='xlsxwriter')
+        df.to_excel(writer, sheet_name='predição')
+        writer.save()
+        processed_data = output.getvalue()
+        return processed_data
+
+    def get_table_download_link(df):
+        """Generates a link allowing the data in a given panda dataframe to be downloaded
+        in:  dataframe
+        out: href string
+        """
+        val = to_excel(df)
+        b64 = base64.b64encode(val)  # val looks like b'...'
+        return f'<a href="data:application/octet-stream;base64,{b64.decode()}" download="extract.xlsx">Download base de dados</a>' # decode b'abc' => abc
+
+    df = input_df
+    st.markdown(get_table_download_link(df), unsafe_allow_html=True)
+    
 except:
     st.write('Aguarde o arquivo ser carregado ou o inputs manual de todos os atributos.')   
 
