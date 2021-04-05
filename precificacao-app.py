@@ -17,9 +17,9 @@ st.write("""
 """)
 
 
-st.sidebar.header('input de atributos pelo usuário')
+st.sidebar.header('input de atributos')
 
-st.sidebar.markdown("""[Exempo de CSV para input ](https://github.com/brunoOnm/app-precificacao/raw/main/teste_price.csv)""")
+st.sidebar.markdown("""[Exempo de planilha para input ](https://github.com/brunoOnm/app-precificacao/raw/main/teste_price.xlsx)""")
 
 # Collects user input features into dataframe
 uploaded_file = st.sidebar.file_uploader("Carregue seu arquivo XLSX", type=["xlsx"])
@@ -231,7 +231,8 @@ try:
     st.markdown(get_table_download_link(df), unsafe_allow_html=True)
     
 except:
-    df = input_df
+    st.write('Aguarde o arquivo ser completamente carregado, ou todos os inputs manuais preenchidos.')
+    
 
 
     
