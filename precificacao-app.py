@@ -5,8 +5,10 @@
 import pandas as pd
 import streamlit as st
 import pickle
+
 import base64 #2.1.0
 from io import BytesIO
+
 
 st.image('./HEADER.png')
 
@@ -17,15 +19,18 @@ st.write("""
 
 st.sidebar.header('input de atributos pelo usuário')
 
-st.sidebar.markdown("""[Exempo de planilha para input ](https://github.com/brunoOnm/app-precificacao/raw/main/teste_price.xlsx)""")
+st.sidebar.markdown("""[Exempo de CSV para input ](https://github.com/brunoOnm/app-precificacao/raw/main/teste_price.csv)""")
 
 # Collects user input features into dataframe
-uploaded_file = st.sidebar.file_uploader("Carregue seu arquivo xlsx", type=["xlsx"])
+uploaded_file = st.sidebar.file_uploader("Carregue seu arquivo XLSX", type=["xlsx"])
 
 
 if uploaded_file is not None:
     input_df = pd.read_excel(uploaded_file)
-    #input_df = pd.read_csv(uploaded_file,encoding = 'latin1', decimal =',',sep =';')
+    # if uploaded_file.type == 'csv':
+    #      input_df = pd.read_csv(uploaded_file,encoding = 'latin1', decimal =',',sep =';')
+    # elif uploaded_file.type == 'xlsx':
+          
 else:
     
     def user_input_features():
@@ -185,7 +190,7 @@ proporção_bojo =['Predict_cauda','Predict_bojo','estimativa_subsidio', 'avalia
 
 # # Apply model to make predictions
 
-st.image('./predicoes.PNG')
+st.image('./predicoes.png')
 st.subheader('Predições')  
 try:
     input_df['estimativa_financiamento'] =  reg_finan.predict(input_df[cols_finan])
@@ -201,7 +206,7 @@ try:
     input_df['renda_ponderada_estimada']  = (input_df.proporcao_bojo *  input_df.Predict_bojo ) +  ((1-input_df.proporcao_bojo) *  input_df.Predict_cauda )
     #st.write(input_df['renda_ponderada_estimada'])
     st.write(input_df[['nome','renda_ponderada_estimada','estimativa_financiamento', 'estimativa_subsidio', 'Predict_bojo','Predict_cauda','proporcao_bojo']])
-   
+    
     def to_excel(df):
         output = BytesIO()
         writer = pd.ExcelWriter(output, engine='xlsxwriter')
@@ -224,6 +229,7 @@ try:
     
 except:
     st.write('Aguarde o arquivo ser carregado ou o inputs manual de todos os atributos.')   
+
 
 
     
