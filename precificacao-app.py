@@ -25,7 +25,6 @@ st.sidebar.markdown("""[Exempo de CSV para input ](https://github.com/brunoOnm/a
 uploaded_file = st.sidebar.file_uploader("Carregue seu arquivo XLSX", type=["xlsx"])
 
 def to_excel(df):
-    x
     output = BytesIO()
     writer = pd.ExcelWriter(output, engine='xlsxwriter')
     df.to_excel(writer, sheet_name='predição')
