@@ -5,3 +5,4 @@ scikit-learn==0.22.1
 statsmodels==0.11.1
 xlrd== 1.2.0
 pybase64== 1.1.4
+xlsxwriter==1.2.8
