@@ -230,7 +230,8 @@ try:
     df = input_df
     st.markdown(get_table_download_link(df), unsafe_allow_html=True)
     
-except:
+except OSError as err:
+    st.write(err)
     st.write('Aguarde o arquivo ser completamente carregado, ou todos os inputs manuais preenchidos.')
     
 
