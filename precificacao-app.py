@@ -227,8 +227,8 @@ try:
     df = input_df
     st.markdown(get_table_download_link(df), unsafe_allow_html=True)
     
-except:
-    st.write('Aguarde o arquivo ser carregado ou o inputs manual de todos os atributos.')   
+#except:
+#    st.write('Aguarde o arquivo ser carregado ou o inputs manual de todos os atributos.')   
 
 
 
