@@ -6,7 +6,7 @@ import pandas as pd
 import streamlit as st
 import pickle
 
-import base64 #2.1.0
+import pybase64
 from io import BytesIO
 
 
@@ -221,14 +221,14 @@ try:
         out: href string
         """
         val = to_excel(df)
-        b64 = base64.b64encode(val)  # val looks like b'...'
+        b64 = pybase64.b64encode(val) 
         return f'<a href="data:application/octet-stream;base64,{b64.decode()}" download="extract.xlsx">Download base de dados</a>' # decode b'abc' => abc
 
     df = input_df
     st.markdown(get_table_download_link(df), unsafe_allow_html=True)
     
-#except:
-#    st.write('Aguarde o arquivo ser carregado ou o inputs manual de todos os atributos.')   
+except:
+    st.write('Aguarde o arquivo ser carregado ou o inputs manual de todos os atributos.')   
 
 
 
